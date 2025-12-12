@@ -7,23 +7,44 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class ClienteTCP {
-    static void main(String[] args) {
-        try(Socket socket = new Socket("localhost", 5000);) {
+    static void main(String[] args) throws IOException {
+       menu();
+    }
 
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+    private static void menu(){
+
+        try {
             BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 
-            String num = teclado.readLine();
+            System.out.print("""
+                1. Nueva partida.
+                
+                2. Salir.
+                """);
 
-            out.writeUTF(num);
+            String usuario = teclado.readLine();
 
-            out.flush();
+            int opcion = Integer.parseInt(usuario);
 
-            socket.shutdownInput();
+            switch (opcion){
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                default:
+                    System.err.println("El valor introducido no esta contemplado.");
+
+            }
 
         }catch (IOException e){
-            e.printStackTrace();
+            System.err.println("Error de IO: " + e.getMessage());
         }
     }
+
+
 }
