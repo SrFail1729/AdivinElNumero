@@ -1,9 +1,6 @@
 package Cliente;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class ClienteTCP {
@@ -49,14 +46,28 @@ public class ClienteTCP {
 
     private static  void comunicaciónServidor(){
         try(Socket socket = new Socket("localhost",65000)){
+            boolean continuar = true;
 
-            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+            while (continuar){
 
-            out.writeUTF(teclado.readLine());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+                BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+                BufferedReader mostar = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            out.flush();
-            socket.shutdownInput();
+                System.out.println("Intenta adivinar el número del 1 al 100");
+                System.out.println("Introduce un número: ");
+
+                String linea;
+                while ()
+
+                if (mostar.readLine().equals("Ganaste")){
+                    System.out.println(mostar.readLine());
+                    continuar = false;
+                }else {
+                    System.out.println(mostar.readLine());
+                }
+
+            }
 
         }catch (IOException e){
             System.err.println("Error de comunicación" + e.getMessage());
